@@ -7,6 +7,7 @@ public class IteratedLinkedList<T> {
     private Iterator<T> first;
 
     public IteratedLinkedList(List<T> list) {
+        if (list.size() == 0) return;
         Iterator<T> it = new Iterator<>();
         first = it;
         for (T item : list) {
