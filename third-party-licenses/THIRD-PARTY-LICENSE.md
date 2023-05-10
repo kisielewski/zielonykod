@@ -387,3 +387,31 @@ POM Project URL: [https://bitbucket.org/snakeyaml/snakeyaml](https://bitbucket.o
 POM License: Apache License, Version 2.0 - [http://www.apache.org/licenses/LICENSE-2.0.txt](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 ---
+
+Third-Party Build Tools License
+===============================
+
+---
+
+1. Gradle and Gradle Wrapper Version: 8.0.1
+
+Project URL: [https://github.com/gradle/gradle](https://github.com/gradle/gradle)
+
+License: Apache License, Version 2.0 - [http://www.apache.org/licenses/LICENSE-2.0.txt](http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+---
+
+2. Spring Boot Gradle plugin Version: 3.0.6
+
+Project URL: [https://github.com/spring-projects/spring-framework](https://github.com/spring-projects/spring-framework)
+
+License: Apache License, Version 2.0 - [http://www.apache.org/licenses/LICENSE-2.0.txt](http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+---
+
+3. Spring Dependency management Version: 1.1.0
+
+Project URL: [https://github.com/spring-projects/spring-framework](https://github.com/spring-projects/spring-framework)
+
+License: Apache License, Version 2.0 - [http://www.apache.org/licenses/LICENSE-2.0.txt](http://www.apache.org/licenses/LICENSE-2.0.txt)

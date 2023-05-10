@@ -274,3 +274,15 @@ http://www.eclipse.org/legal/epl-v10.html
 
 License: GNU Lesser General Public License:
 http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+
+---
+
+# Third-Party Build Tools License:
+
+>>> Gradle and Gradle Wrapper (8.0.1)
+>>> Spring Boot Gradle plugin (3.0.6)
+>>> Spring Dependency management (1.1.0)
+
+License: The Apache Software License, Version 2.0
+See above
