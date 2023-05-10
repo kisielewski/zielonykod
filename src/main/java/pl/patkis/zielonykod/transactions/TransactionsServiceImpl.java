@@ -1,5 +1,6 @@
 package pl.patkis.zielonykod.transactions;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +16,10 @@ public class TransactionsServiceImpl implements TransactionsService {
         Map<String, Account> map = new HashMap<>();
         for (Transaction t : transactions) {
             Account creditAccount = getAccount(map, t.creditAccount);
-            creditAccount.balance += t.amount;
+            creditAccount.balance = creditAccount.balance.add(t.amount);
             creditAccount.creditCount += 1;
             Account debitAccount = getAccount(map, t.debitAccount);
-            debitAccount.balance -= t.amount;
+            debitAccount.balance = debitAccount.balance.subtract(t.amount);
             debitAccount.debitCount += 1;
         }
         List<Account> result = new ArrayList<>(map.values());
@@ -34,7 +35,7 @@ public class TransactionsServiceImpl implements TransactionsService {
         result.account = account;
         result.creditCount = 0;
         result.debitCount = 0;
-        result.balance = 0;
+        result.balance = BigDecimal.ZERO;
         map.put(account, result);
         return result;
     }
