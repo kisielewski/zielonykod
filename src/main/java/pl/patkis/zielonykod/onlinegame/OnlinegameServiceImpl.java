@@ -9,8 +9,8 @@ public class OnlinegameServiceImpl implements OnlinegameService {
 
     @Override
     public List<List<Clan>> groupPlayers(Players players) {
-        OnlinegameSolver solver = new OnlinegameSolver(players);
-        return solver.solve();
+        OnlinegameSolver solver = new OnlinegameSolver();
+        return solver.solve(players);
     }
     
 }

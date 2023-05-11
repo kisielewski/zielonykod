@@ -1,7 +1,5 @@
 package pl.patkis.zielonykod.util;
 
-import java.util.List;
-
 public class IteratedLinkedList<T> {
 
     private Iterator<T> first;
@@ -14,21 +12,6 @@ public class IteratedLinkedList<T> {
         last.prev = first;
     }
 
-    public IteratedLinkedList(List<T> values) {
-        Iterator<T> prev = new Iterator<>();
-        first = prev;
-        for (T value : values) {
-            Iterator<T> current = new Iterator<>();
-            current.value = value;
-            current.prev = prev;
-            prev.next = current;
-            prev = current;
-        }
-        last = new Iterator<>();
-        last.prev = prev;
-        prev.next = last;
-    }
-
     public Iterator<T> begin() {
         return first.next;
     }
@@ -37,10 +20,23 @@ public class IteratedLinkedList<T> {
         return last;
     }
 
+    public void add(T value) {
+        Iterator<T> it = new Iterator<>();
+        it.value = value;
+        it.prev = last.prev;
+        it.next = last;
+        it.prev.next = it;
+        it.next.prev = it;
+    }
+
     public Iterator<T> remove(Iterator<T> it) {
         it.prev.next = it.next;
         it.next.prev = it.prev;
         return it.next;
+    }
+
+    public boolean isEmpty() {
+        return first.next == last;
     }
     
 }
