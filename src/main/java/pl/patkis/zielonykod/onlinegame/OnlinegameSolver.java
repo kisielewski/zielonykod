@@ -50,7 +50,7 @@ public class OnlinegameSolver {
 
     private Clan pop() {
         Iterator<Clan> it = current;
-        while (it != null) {
+        while (it != iteratedLinkedList.end()) {
             if (it.value().numberOfPlayers <= currentCount) {
                 current = iteratedLinkedList.remove(it);
                 currentCount -= it.value().numberOfPlayers;

@@ -5,34 +5,41 @@ import java.util.List;
 public class IteratedLinkedList<T> {
 
     private Iterator<T> first;
+    private Iterator<T> last;
 
-    public IteratedLinkedList(List<T> list) {
-        if (list.size() == 0) return;
-        Iterator<T> it = new Iterator<>();
-        first = it;
-        for (T item : list) {
-            it.value = item;
-            Iterator<T> next = new Iterator<>();
-            it.next = next;
-            next.prev = it;
-            it = next;
+    public IteratedLinkedList() {
+        first = new Iterator<>();
+        last = new Iterator<>();
+        first.next = last;
+        last.prev = first;
+    }
+
+    public IteratedLinkedList(List<T> values) {
+        Iterator<T> prev = new Iterator<>();
+        first = prev;
+        for (T value : values) {
+            Iterator<T> current = new Iterator<>();
+            current.value = value;
+            current.prev = prev;
+            prev.next = current;
+            prev = current;
         }
-        it.prev.next = null;
+        last = new Iterator<>();
+        last.prev = prev;
+        prev.next = last;
     }
 
     public Iterator<T> begin() {
-        return first;
+        return first.next;
+    }
+
+    public Iterator<T> end() {
+        return last;
     }
 
     public Iterator<T> remove(Iterator<T> it) {
-        if (it.prev == null) {
-            first = it.next;
-        } else {
-            it.prev.next = it.next;
-        }
-        if (it.next != null) {
-            it.next.prev = it.prev;
-        }
+        it.prev.next = it.next;
+        it.next.prev = it.prev;
         return it.next;
     }
     
