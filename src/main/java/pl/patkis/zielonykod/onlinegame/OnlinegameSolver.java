@@ -8,19 +8,19 @@ import pl.patkis.zielonykod.util.Iterator;
 
 public class OnlinegameSolver {
 
-    private IteratedLinkedList<Clan> _iteratedLinkedList;
-    private Iterator<Clan> _current;
-    private int _groupCount;
-    private int _currentCount;
-    private int _maximum;
+    private IteratedLinkedList<Clan> iteratedLinkedList;
+    private Iterator<Clan> current;
+    private int groupCount;
+    private int currentCount;
+    private int maximum;
 
     OnlinegameSolver(Players players) {
-        _groupCount = players.groupCount;
-        _maximum = 0;
+        groupCount = players.groupCount;
+        maximum = 0;
         players.clans.sort((c1, c2) -> {
             return c1.points == c2.points ? c1.numberOfPlayers - c2.numberOfPlayers : c2.points - c1.points;
         });
-        _iteratedLinkedList = new IteratedLinkedList<>(players.clans);
+        iteratedLinkedList = new IteratedLinkedList<>(players.clans);
     }
 
     public List<List<Clan>> solve() {
@@ -40,20 +40,20 @@ public class OnlinegameSolver {
             Clan clan = pop();
             if (clan == null) break;
             result.add(clan);
-            if (_maximum >= _currentCount) break;
+            if (maximum >= currentCount) break;
         }
-        if (_maximum < _currentCount) {
-            _maximum = _currentCount;
+        if (maximum < currentCount) {
+            maximum = currentCount;
         }
         return result;
     }
 
     private Clan pop() {
-        Iterator<Clan> it = _current;
+        Iterator<Clan> it = current;
         while (it != null) {
-            if (it.value().numberOfPlayers <= _currentCount) {
-                _current = _iteratedLinkedList.remove(it);
-                _currentCount -= it.value().numberOfPlayers;
+            if (it.value().numberOfPlayers <= currentCount) {
+                current = iteratedLinkedList.remove(it);
+                currentCount -= it.value().numberOfPlayers;
                 return it.value();
             }
             it = it.next();
@@ -62,8 +62,8 @@ public class OnlinegameSolver {
     }
 
     private void reset() {
-        _current = _iteratedLinkedList.begin();
-        _currentCount = _groupCount;
+        current = iteratedLinkedList.begin();
+        currentCount = groupCount;
     }
     
 }
