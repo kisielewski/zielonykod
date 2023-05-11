@@ -12,9 +12,11 @@ public class OnlinegameSolver {
     private Iterator<Clan> _current;
     private int _groupCount;
     private int _currentCount;
+    private int _maximum;
 
     OnlinegameSolver(Players players) {
         _groupCount = players.groupCount;
+        _maximum = 0;
         players.clans.sort((c1, c2) -> {
             return c1.points == c2.points ? c1.numberOfPlayers - c2.numberOfPlayers : c2.points - c1.points;
         });
@@ -38,6 +40,10 @@ public class OnlinegameSolver {
             Clan clan = pop();
             if (clan == null) break;
             result.add(clan);
+            if (_maximum >= _currentCount) break;
+        }
+        if (_maximum < _currentCount) {
+            _maximum = _currentCount;
         }
         return result;
     }
