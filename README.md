@@ -20,4 +20,4 @@ Aplikacja korzysta z biblioteki Spring Boot i jej zależności na licencjach typ
 
 ## Autor
 
-Patryk Kisielewski
+Patryk Kisielewski <pkisielewski@patkis.pl>
