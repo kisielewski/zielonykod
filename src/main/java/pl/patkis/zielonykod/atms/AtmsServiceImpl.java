@@ -10,13 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AtmsServiceImpl implements AtmsService {
 
-    private static final Map<String, Integer> PRIORITIES_MAP = new HashMap<>() {{
-        put("FAILURE_RESTART", 1);
-        put("PRIORITY", 2);
-        put("SIGNAL_LOW", 3);
-        put("STANDARD", 4);
-    }};
-
     @Override
     public List<Atm> calculateOrder(List<Task> tasks) {
         Map<Integer, Map<Integer, AtmEx>> maps = new HashMap<>();
@@ -44,15 +37,15 @@ public class AtmsServiceImpl implements AtmsService {
         if (item == null) {
             item = new AtmEx();
             item.index = index;
-            item.priority = PRIORITIES_MAP.get(task.requestType);
+            item.priority = 4;
             Atm atm = new Atm();
             atm.region = task.region;
             atm.atmId = task.atmId;
             item.atm = atm;
             map.put(task.atmId, item);
-            return;
         }
-        int priority = PRIORITIES_MAP.get(task.requestType);
+        char c = task.requestType.charAt(1);
+        int priority = c == 'A' ? 1 : c == 'R' ? 2 : c == 'I' ? 3 : 4;
         if (priority < item.priority) {
             item.priority = priority;
         }
