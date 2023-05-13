@@ -28,15 +28,15 @@ public class TransactionsServiceImpl implements TransactionsService {
     }
 
     private Account getAccount(Map<String, Account> map, String account) {
-        if (map.containsKey(account)) {
-            return map.get(account);
+        Account result = map.get(account);
+        if (result == null) {
+            result = new Account();
+            result.account = account;
+            result.creditCount = 0;
+            result.debitCount = 0;
+            result.balance = BigDecimal.ZERO;
+            map.put(account, result);
         }
-        Account result = new Account();
-        result.account = account;
-        result.creditCount = 0;
-        result.debitCount = 0;
-        result.balance = BigDecimal.ZERO;
-        map.put(account, result);
         return result;
     }
     

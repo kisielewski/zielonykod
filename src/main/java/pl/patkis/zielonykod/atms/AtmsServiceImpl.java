@@ -40,14 +40,9 @@ public class AtmsServiceImpl implements AtmsService {
 
     private void updateATM(Map<Integer, Map<Integer, AtmEx>> maps, Task task, int index) {
         Map<Integer, AtmEx> map = getRegion(maps, task.region);
-        if (map.containsKey(task.atmId)) {
-            AtmEx item = map.get(task.atmId);
-            int priority = PRIORITIES_MAP.get(task.requestType);
-            if (priority < item.priority) {
-                item.priority = priority;
-            }
-        } else {
-            AtmEx item = new AtmEx();
+        AtmEx item = map.get(task.atmId);
+        if (item == null) {
+            item = new AtmEx();
             item.index = index;
             item.priority = PRIORITIES_MAP.get(task.requestType);
             Atm atm = new Atm();
@@ -55,15 +50,20 @@ public class AtmsServiceImpl implements AtmsService {
             atm.atmId = task.atmId;
             item.atm = atm;
             map.put(task.atmId, item);
+            return;
+        }
+        int priority = PRIORITIES_MAP.get(task.requestType);
+        if (priority < item.priority) {
+            item.priority = priority;
         }
     }
 
     private Map<Integer, AtmEx> getRegion(Map<Integer, Map<Integer, AtmEx>> maps, int region) {
-        if (maps.containsKey(region)) {
-            return maps.get(region);
+        Map<Integer, AtmEx> result = maps.get(region);
+        if (result == null) {
+            result = new HashMap<>();
+            maps.put(region, result);
         }
-        Map<Integer, AtmEx> result = new HashMap<>();
-        maps.put(region, result);
         return result;
     }
     
